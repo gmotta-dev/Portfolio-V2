@@ -1,0 +1,1 @@
+export type TClassNames<T extends string> = { [key in T]?: string }

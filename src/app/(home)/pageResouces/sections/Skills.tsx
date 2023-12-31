@@ -27,11 +27,11 @@ type TSkill = { img: TNextImage; className?: string };
 
 const SkillComponent: FC<TSkill> = (props) => {
   return (
-    <div
+    <li
       className={`flex min-h-[96px] cursor-pointer items-center justify-center rounded-lg bg-sulu-300 px-2 duration-150 hover:bg-sulu-200 
       ${props.className || ""}`}>
-      <Image {...props.img} src={`${process.env.NEXT_PUBLIC_CLOUDFRONT_URL}/${props.img.src}`} />
-    </div>
+      <Image {...props.img} src={props.img.src} />
+    </li>
   );
 };
 

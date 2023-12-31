@@ -34,8 +34,8 @@ const ProjectItem: FC<TProjectItem> = (props) => {
       <div className="flex w-full max-w-[588px] flex-col">
         <div className="flex items-center gap-4 ">
           <h2 className="mr-auto text-3xl font-bold text-purple-heart-700 md:text-4xl lg:text-5xl">{props.title}</h2>
-          <ProjectItemLinkIcon href={props.repoURL} icon={LogoGithub} />
-          <ProjectItemLinkIcon href={props.websiteURL} icon={Wikis} />
+          <ProjectItemLinkIcon href={props.repoURL} icon={LogoGithub} name="Repo" />
+          <ProjectItemLinkIcon href={props.websiteURL} icon={Wikis} name="Live Website" />
         </div>
         <p className="mt-2 line-clamp-3 w-full tracking-wider text-purple-heart-950 md:max-w-lg lg:text-lg">{props.description}</p>
         <div className="mt-4 flex flex-col gap-3">
@@ -51,11 +51,11 @@ const ProjectItem: FC<TProjectItem> = (props) => {
   );
 };
 
-type TProjectItemLinkIcon = { icon: CarbonIconType; href: string };
+type TProjectItemLinkIcon = { icon: CarbonIconType; href: string; name: string };
 
 const ProjectItemLinkIcon: FC<TProjectItemLinkIcon> = (props) => {
   return (
-    <Link href={props.href} className="z-20">
+    <Link href={props.href} className="z-20" aria-label={props.name}>
       <props.icon className="h-8 w-8 text-purple-heart-700" />
     </Link>
   );

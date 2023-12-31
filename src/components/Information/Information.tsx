@@ -20,11 +20,11 @@ export default function Information(props: TInformation): JSX.Element {
   );
 }
 
-type TItem = { label?: string | false; element: "a" | "div"; icon: CarbonIconType; href?: string; classNames?: Partial<Record<"container" | "icon" | "label", string>> };
+type TItem = {name: string, label?: string | false; element: "a" | "div"; icon: CarbonIconType; href?: string; classNames?: Partial<Record<"container" | "icon" | "label", string>> };
 
 const Item: FC<TItem> = (props) => {
   return (
-    <props.element className={twMerge("flex items-center gap-4", props.classNames?.container)} href={props.href}>
+    <props.element className={twMerge("flex items-center gap-4", props.classNames?.container)} aria-label={props.name} href={props.href}>
       <props.icon className={twMerge("h-8 w-8", props.classNames?.icon)} /> {props.label && <span className={twMerge(props.classNames?.label)}>{props.label}</span>}
     </props.element>
   );

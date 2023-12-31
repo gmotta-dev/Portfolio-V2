@@ -4,7 +4,7 @@ import AboutMeHeader from "./Header";
 import IDE from "./IDE/IDE";
 
 const getLottie = async () =>
-  await fetch(process.env.NEXT_PUBLIC_CLOUDFRONT_URL + "/hero-lottie.json")
+  await fetch(process.env.NEXT_PUBLIC_CLOUDFRONT_URL + "/lotties/hero-lottie.json")
     .then((res) => res.json())
     .catch((err) => console.log(err));
 

@@ -19,6 +19,7 @@ export default function TextArea({ placeholder, schema, ...props }: TInput): JSX
     <TextInputWrapper name={props.name} label={props.label} stylization={props.stylization} {...textInputStates.textInputWrapperProps}>
       <textarea
         {...props}
+        id={props.name + "-input-id"}
         {...textInputStates.inputElementProps}
         onChange={onChange}
         className={`min-h-[200px] w-full resize-none border-0 bg-transparent pl-3 pt-3 text-sm !outline-none transition-all duration-300`}

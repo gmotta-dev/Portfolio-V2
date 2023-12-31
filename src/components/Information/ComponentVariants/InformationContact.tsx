@@ -9,6 +9,7 @@ export default function InformationContact(props: TInformationGeneral) {
       items={[
         {
           icon: Email,
+          name: "Email",
           label: "gpmotta21@gmail.com",
           href: "",
           element: "a",
@@ -17,12 +18,14 @@ export default function InformationContact(props: TInformationGeneral) {
         {
           icon: PhoneFilled,
           label: "+55 2197426-4416",
+          name: "Phone",
           element: "div",
           classNames: { icon: props.classNames?.["phone-icon"], label: props.classNames?.["phone-label"], container: props.classNames?.["phone-container"] },
         },
         {
           icon: Location,
           label: "Rio de Janeiro, Brazil",
+          name: "Location",
           element: "div",
           classNames: { icon: props.classNames?.["location-icon"], label: props.classNames?.["location-label"], container: props.classNames?.["location-container"] },
         },

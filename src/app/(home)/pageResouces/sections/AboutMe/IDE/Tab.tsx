@@ -1,11 +1,11 @@
 import { ReactNode } from "react";
-import { Close, CopyFile } from "@carbon/icons-react";
+import { Close } from "@carbon/icons-react";
 import { CarbonIconType } from "@carbon/icons-react/lib/CarbonIcon";
 import { twMerge } from "tailwind-merge";
 
 export default function Tab(props: TTab) {
   return (
-    <div className={twMerge("flex flex-1 flex-col items-start lg:w-1/2", props.classNames?.container)}>
+    <div className={twMerge("flex flex-1 flex-col items-start overflow-hidden lg:w-1/2", props.classNames?.container)}>
       <span className="flex items-center gap-2 bg-purple-heart-800 py-2 pl-6 pr-2 text-xs font-medium text-white">
         <span>
           <props.Icon className="text-sulu-300" />

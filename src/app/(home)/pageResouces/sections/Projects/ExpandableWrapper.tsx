@@ -20,7 +20,7 @@ export default function ExpandableWrapper(props: { children: ReactNode }): JSX.E
           )}
         />
         <ContentWrapper element="section" className="relative mt-32 lg:mt-48">
-          <div className={twMerge("relative overflow-hidden transition-all duration-1000 ease-in-out", expand ? "max-h-[2500px]" : "max-h-[700px]")}>{props.children}</div>
+          <div className={twMerge("relative overflow-hidden transition-all duration-1000 ease-in-out", expand ? "max-h-[4000px] lg:max-h-[2500px]" : "max-h-[700px]")}>{props.children}</div>
         </ContentWrapper>
       </div>
       <Button stylization={{ type: "base", color: "sulu" }} onClick={() => setExpand(!expand)} className="bottom-0 z-10 mx-auto mt-8 w-full max-w-xs">

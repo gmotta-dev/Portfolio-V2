@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@carbon/icons-react": "^11.30.0",
+    "@upstash/ratelimit": "^1.0.0",
+    "@upstash/redis": "^1.27.1",
     "framer-motion": "^10.16.5",
     "lottie-react": "^2.4.0",
     "markdown-to-jsx": "^7.3.2",

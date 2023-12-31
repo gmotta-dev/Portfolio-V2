@@ -1,9 +1,3 @@
 declare namespace NodeJS {
-  interface ProcessEnv {
-    NEXT_PUBLIC_CLOUDFRONT_URL: string;
-    RDS_USERNAME: string;
-    RDS_HOSTNAME: string;
-    RDS_DB_NAME: string;
-    RDS_PASSWORD: string;
-  }
+  interface ProcessEnv extends Record<"NEXT_PUBLIC_CLOUDFRONT_URL" | "RDS_PASSWORD" | "RDS_DB_NAME" | "RDS_HOSTNAME" | "RDS_USERNAME" | 'UPSTASH_REDIS_REST_TOKEN' | 'UPSTASH_REDIS_REST_URL', string> {}
 }

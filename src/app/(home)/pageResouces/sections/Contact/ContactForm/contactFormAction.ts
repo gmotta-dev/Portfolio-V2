@@ -1,5 +1,7 @@
 "use server";
 
+import { headers } from "next/headers";
+
 import pgQuery from "@/db/pg/pgQuery";
 import returnZodErrors from "@/util/returnZodErrors";
 import { contactFormSchema } from "./contactFormSchema";
@@ -7,6 +9,10 @@ import { TContactFormState } from "./types";
 
 export default async function contactFormAction(prevState: TContactFormState, formData: FormData): Promise<TContactFormState> {
   try {
+    const reqHeaders = headers();
+
+    if (reqHeaders.get("X-RateLimit-Success") === "false") throw new Error("Rate Limited");
+
     const fieldValues = contactFormSchema.parse(Object.fromEntries(formData));
 
     const hasEmail = await pgQuery({ text: "SELECT email FROM portfolio.contact_messages WHERE email = $1", values: [fieldValues.email] });
@@ -19,8 +25,7 @@ export default async function contactFormAction(prevState: TContactFormState, fo
 
     return { ...prevState, toast: { title: "Message sent", stylization: { theme: "success" } } };
   } catch (err) {
-
-    console.log(err)
+    console.log(err);
 
     const fieldErrors = returnZodErrors(err);
 

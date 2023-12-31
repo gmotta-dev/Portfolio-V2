@@ -16,8 +16,16 @@ export async function middleware(req: NextRequest) {
   if (req.method === "POST") {
     const reqHeaders = new Headers(req.headers);
 
-    const ip = req.ip ?? "127.0.0.1";
-    const result = await ratelimit.limit(ip);
+    let ip = req.ip ?? reqHeaders.get("x-real-ip");
+    const forwardedFor = reqHeaders.get("x-forwarded-for");
+
+    if (!ip && forwardedFor) {
+      ip = forwardedFor.split(",").at(0) ?? "127.0.0.1";
+    }
+
+    console.log("User IP:", ip);
+
+    const result = await ratelimit.limit(ip || "127.0.0.1");
     reqHeaders.set("X-RateLimit-Reset", result.reset.toString());
     reqHeaders.set("X-RateLimit-Limit", result.limit.toString());
     reqHeaders.set("X-RateLimit-Remaining", result.remaining.toString());

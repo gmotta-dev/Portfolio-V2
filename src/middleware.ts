@@ -7,14 +7,14 @@ const redis = new Redis({
   token: process.env.UPSTASH_REDIS_REST_TOKEN,
 });
 
+const ratelimit = new Ratelimit({
+  redis: redis,
+  limiter: Ratelimit.fixedWindow(10, "60 s"),
+});
+
 export async function middleware(req: NextRequest) {
   if (req.method === "POST") {
     const reqHeaders = new Headers(req.headers);
-
-    const ratelimit = new Ratelimit({
-      redis: redis,
-      limiter: Ratelimit.fixedWindow(5, "60 s"),
-    });
 
     const ip = req.ip ?? "127.0.0.1";
     const result = await ratelimit.limit(ip);

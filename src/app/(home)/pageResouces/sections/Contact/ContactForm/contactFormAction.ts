@@ -12,7 +12,7 @@ import { TContactFormState } from "./types";
 
 const ratelimit = new Ratelimit({
   redis: redisPool,
-  limiter: Ratelimit.fixedWindow(3, "60 s"),
+  limiter: Ratelimit.fixedWindow(5, "60 s"),
 });
 
 export default async function contactFormAction(prevState: TContactFormState, formData: FormData): Promise<TContactFormState> {

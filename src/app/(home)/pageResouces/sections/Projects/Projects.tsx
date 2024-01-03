@@ -72,7 +72,7 @@ const projectItemsOpts: TProjectItem[] = [
     tags: ["React", "Typescript", "Styled Components", "Email js"],
     date: "06/13/2022",
     repoURL: "https://github.com/gpmotta21/Portfolio",
-    websiteURL: "gabrielp.netlify.app/",
+    websiteURL: "https://gabrielp.netlify.app/",
     thumbSrc: "projects-portfolio-v1.webp",
   },
   {

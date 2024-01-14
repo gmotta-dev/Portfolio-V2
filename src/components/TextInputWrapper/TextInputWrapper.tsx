@@ -10,6 +10,7 @@ export default function TextInputWrapper({ placeholder, ...props }: TTextFieldWr
     <div>
       <div className="relative">
         <label
+          htmlFor={props.name + "-input-id"}
           className={twMerge(
             "pointer-events-none absolute left-3 z-30 -translate-y-1/2 transition-all duration-100 ease-in-out",
             props.animateLabel ? "top-0 text-sm text-purple-heart-400" : "top-6",

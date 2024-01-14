@@ -32,7 +32,7 @@ type TItem = {
 
 const Item: FC<TItem> = (props) => {
   return (
-    <props.element className={twMerge("flex items-center gap-4", props.classNames?.container || '')} target="_blank" download aria-label={props.name} href={props.href}>
+    <props.element className={twMerge("flex items-center gap-4", props.classNames?.container || "")} target="_blank" download aria-label={props.label || props.name} href={props.href}>
       <props.icon className={twMerge("h-8 w-8", props.classNames?.icon)} /> {props.label && <span className={twMerge(props.classNames?.label)}>{props.label}</span>}
     </props.element>
   );

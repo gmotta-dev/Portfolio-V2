@@ -7,15 +7,16 @@ type InferFormValues<T> = T extends ZodType<infer U, any, any> ? U : never;
 
 type UseFormStatesProps<T extends SomeZodObject> = {
   schema?: T;
+  defaultValues?: Partial<InferFormValues<T>>;
 };
 
 export const useFormStates = <T extends SomeZodObject>(props?: UseFormStatesProps<T>) => {
-  const [formValues, setFormValues] = useState<InferFormValues<T>>({} as InferFormValues<T>);
+  const [formValues, setFormValues] = useState<InferFormValues<T>>(props?.defaultValues as InferFormValues<T>);
   const [errors, setErrors] = useState<InferFormValues<T>>({} as InferFormValues<T>);
   const [hasSubmitted, setHasSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const register = (name: keyof InferFormValues<T>) => {
+  const register = (name: string | keyof InferFormValues<T>) => {
     const onChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       setFormValues({ ...formValues, [name]: e.target.value });
 
@@ -41,20 +42,22 @@ export const useFormStates = <T extends SomeZodObject>(props?: UseFormStatesProp
       }
     };
 
-    return { onChange, name: name as string, value: formValues[name] };
+    return { onChange, name: name as string };
   };
 
-  const onSubmit = (mySubmit: any) => (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = (mySubmit: (formVal: InferFormValues<T>) => void | Promise<void>) => async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     setHasSubmitted(true);
-    setLoading(true);
 
     if (props?.schema) {
       try {
-        props.schema.parse(formValues);
+        const validatedFormValues = props.schema.parse(formValues) as InferFormValues<T>;
         setErrors({} as InferFormValues<T>);
 
-        mySubmit();
-        setLoading(false);
+        setLoading(true);
+
+        await mySubmit(validatedFormValues);
       } catch (err) {
         if (err instanceof ZodError) {
           const newErrors = err.errors.reduce((acc, cur) => {
@@ -64,29 +67,11 @@ export const useFormStates = <T extends SomeZodObject>(props?: UseFormStatesProp
 
           setErrors(newErrors);
         }
+      } finally {
+        setLoading(false);
       }
     }
   };
 
-  function onAction(callback: (e: FormData) => Promise<void>) {
-    return async (e: FormData) => {
-      try {
-        setErrors({} as InferFormValues<T>);
-
-        await callback(e);
-      } catch (err) {
-        console.log(err);
-        if (err instanceof ZodError) {
-          const newErrors = err.errors.reduce((acc, cur) => {
-            const fieldName = cur.path[0];
-            return { ...acc, [fieldName]: cur.message };
-          }, {} as InferFormValues<T>);
-
-          setErrors(newErrors);
-        }
-      }
-    };
-  }
-
-  return { register, formValues, onAction, loading, setLoading, onSubmit, errors, setFormValues };
+  return { register, formValues, loading, setLoading, onSubmit, errors, setFormValues, setErrors };
 };

@@ -1,15 +1,15 @@
 import { FC } from "react";
 import { LogoGithub, Wikis } from "@carbon/icons-react";
 import { CarbonIconType } from "@carbon/icons-react/lib/CarbonIcon";
-import Image from "next/image";
 import Link from "next/link";
 
+import CustomImage from "@/components/CustomImage";
 import ExpandableWrapper from "./ExpandableWrapper";
 
 export default function Projects(): JSX.Element {
   return (
     <ExpandableWrapper>
-      <h2 className="mx-auto text-center text-3xl font-bold text-purple-heart-950 [@media(min-width:1620px)]:hidden">Projects</h2>
+      <h2 className="mx-auto text-center text-3xl md:text-5xl mb-16 font-bold text-purple-heart-950 [@media(min-width:1620px)]:hidden">Projects</h2>
       {projectItemsOpts.map((i, key) => (
         <ProjectItem {...i} key={key} />
       ))}
@@ -30,7 +30,7 @@ type TProjectItem = {
 const ProjectItem: FC<TProjectItem> = (props) => {
   return (
     <div className="relative mt-12 flex flex-col items-start justify-between gap-4 rounded-lg md:mt-0 md:flex-row md:justify-between md:gap-6 md:py-3 md:transition-all md:duration-300 lg:gap-16">
-      <Image src={props.thumbSrc} width={682} height={317} layout="responsive" alt={props.title} className="rounded-xl md:min-w-[320px] md:max-w-[486px]" />
+      <CustomImage width={682} height={317} src={props.thumbSrc} alt={props.title} className="rounded-xl md:min-w-[320px] md:max-w-[486px]" />
       <div className="flex w-full max-w-[588px] flex-col">
         <div className="flex items-center gap-4 ">
           <h2 className="mr-auto text-3xl font-bold text-purple-heart-700 md:text-4xl lg:text-5xl">{props.title}</h2>

@@ -1,31 +1,29 @@
 "use server";
 
 import { Ratelimit } from "@upstash/ratelimit";
-import { headers } from "next/headers";
 
+import { TToast } from "@/components/Toast/types";
 import pgQuery from "@/db/pg/pgQuery";
 import redisPool from "@/db/redis/redisPool";
 import getIpFromHeaders from "@/util/getIpFromHeaders";
 import returnZodErrors from "@/util/returnZodErrors";
-import { contactFormSchema } from "./contactFormSchema";
-import { TContactFormState } from "./types";
+import { contactFormSchema, TContactFormSchema } from "./schema";
 
 const ratelimit = new Ratelimit({
   redis: redisPool,
   limiter: Ratelimit.fixedWindow(5, "60 s"),
 });
 
-export default async function contactFormAction(prevState: TContactFormState, formData: FormData): Promise<TContactFormState> {
+export default async function contactFormAction(formData: TContactFormSchema) {
   try {
-    const reqHeaders = headers();
-    const ip = getIpFromHeaders(reqHeaders);
+    const ip = getIpFromHeaders();
 
-    console.log(ip);
+    const result = await ratelimit.limit(ip)
+    if (!result.success) return { toast: { title: "Rate Limited", stylization: { theme: "error" } } as TToast };
 
-    const result = await ratelimit.limit(ip);
-    if (!result.success) throw new Error("Rate Limited");
+    const fieldValues = contactFormSchema.parse(formData);
 
-    const fieldValues = contactFormSchema.parse(Object.fromEntries(formData));
+    console.log(fieldValues);
 
     const hasEmail = await pgQuery({ text: "SELECT email FROM portfolio.contact_messages WHERE email = $1", values: [fieldValues.email] });
 
@@ -40,14 +38,14 @@ export default async function contactFormAction(prevState: TContactFormState, fo
         values: [fieldValues.fullname, fieldValues.email, fieldValues.message || "", fieldValues.subject],
       });
 
-    return { ...prevState, toast: { title: "Message sent", stylization: { theme: "success" } } };
+    return { toast: { title: "Message sent", stylization: { theme: "success" } } as TToast };
   } catch (err) {
     console.log(err);
 
-    const fieldErrors = returnZodErrors(err);
+    const fieldErrors = returnZodErrors(err) as TContactFormSchema;
 
-    if (fieldErrors) return { fieldErrors } as TContactFormState;
+    if (fieldErrors) return { fieldErrors };
 
-    return { ...prevState, toast: { title: "An server error occurred", stylization: { theme: "error" } } };
+    return { toast: { title: "An server error occurred", stylization: { theme: "error" } } as TToast };
   }
 }

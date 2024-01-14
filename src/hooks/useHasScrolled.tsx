@@ -5,8 +5,8 @@ export default function useHasScrolled() {
 
   let prev = typeof window !== "undefined" ? window.scrollY : 0;
 
-  const handleScroll = (e: any) => {
-    const curr = e.currentTarget.scrollY;
+  const handleScroll = (e?: any) => {
+    const curr = e ? e.currentTarget.scrollY : window.scrollY;
 
     if (curr > prev) setScrolledOpts({ direction: "up", y: curr });
     else setScrolledOpts({ direction: "down", y: curr });
@@ -15,6 +15,8 @@ export default function useHasScrolled() {
   };
 
   useEffect(() => {
+    handleScroll();
+
     if (typeof window !== undefined) {
       window.addEventListener("scroll", handleScroll);
 

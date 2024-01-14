@@ -14,7 +14,14 @@ export default function InformationGeneral(props: TInformationSocialMedia) {
       items={[
         { icon: LogoGithub, name: "Github", href: "https://github.com/gpmotta21", element: "a", label: props.label ? "Github" : undefined },
         { icon: LogoLinkedin, name: "Linkedin", href: "https://www.linkedin.com/in/gpmotta21/", element: "a", label: props.label ? "Linkedin" : undefined },
-        { icon: UserProfile, name: "Resume", href: "", element: "a", label: props.label ? "Resume" : undefined },
+        {
+          icon: UserProfile,
+          name: "Resume",
+          download: true,
+          href: process.env.NEXT_PUBLIC_CLOUDFRONT_URL + "/PDFs/Gabriel-Motta-Resume.pdf",
+          element: "a",
+          label: props.label ? "Resume" : undefined,
+        },
       ]}
     />
   );

@@ -8,19 +8,19 @@ export default function InformationContact(props: TInformationGeneral) {
       classNames={{ ...props.classNames, container: `gap-6 ${props.classNames?.container}`, "all-items-icons": `h-9 w-9 ${props.classNames?.["all-items-icons"]}` }}
       items={[
         {
-          icon: Email,
-          name: "Email",
-          label: "gpmotta21@gmail.com",
-          href: "",
-          element: "a",
-          classNames: { icon: props.classNames?.["email-icon"], label: props.classNames?.["email-label"], container: props.classNames?.["email-container"] },
-        },
-        {
           icon: PhoneFilled,
           label: "+55 2197426-4416",
           name: "Phone",
           element: "div",
           classNames: { icon: props.classNames?.["phone-icon"], label: props.classNames?.["phone-label"], container: props.classNames?.["phone-container"] },
+        },
+        {
+          icon: Email,
+          name: "Email",
+          label: "gpmotta21@gmail.com",
+          href: "mailto:gpmotta21@gmail.com",
+          element: "a",
+          classNames: { icon: props.classNames?.["email-icon"], label: props.classNames?.["email-label"], container: props.classNames?.["email-container"] },
         },
         {
           icon: Location,

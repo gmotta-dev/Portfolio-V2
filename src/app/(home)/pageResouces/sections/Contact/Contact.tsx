@@ -18,8 +18,8 @@ export default function Contact(): JSX.Element {
             classNames={{
               container: "flex-col",
               "all-items": "px-6 py-4 rounded-lg",
-              "phone-container": "text-black bg-sulu-300 !text-black",
-              "email-label": "text-zinc-50",
+              "email-container": "text-black bg-sulu-300 !text-black",
+              "phone-label": "text-zinc-50",
               "location-label": "text-zinc-50",
               "all-items-labels": "font-medium md:text-lg",
             }}

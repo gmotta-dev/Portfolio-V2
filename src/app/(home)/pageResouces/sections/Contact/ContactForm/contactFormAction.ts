@@ -1,6 +1,7 @@
 "use server";
 
 import { Ratelimit } from "@upstash/ratelimit";
+import { headers } from "next/headers";
 
 import { TToast } from "@/components/Toast/types";
 import pgQuery from "@/db/pg/pgQuery";
@@ -16,9 +17,10 @@ const ratelimit = new Ratelimit({
 
 export default async function contactFormAction(formData: TContactFormSchema) {
   try {
-    const ip = getIpFromHeaders();
+    const reqHeaders = headers();
+    const ip = getIpFromHeaders(reqHeaders);
 
-    const result = await ratelimit.limit(ip)
+    const result = await ratelimit.limit(ip,);
     if (!result.success) return { toast: { title: "Rate Limited", stylization: { theme: "error" } } as TToast };
 
     const fieldValues = contactFormSchema.parse(formData);

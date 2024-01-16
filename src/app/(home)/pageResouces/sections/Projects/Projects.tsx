@@ -9,7 +9,7 @@ import ExpandableWrapper from "./ExpandableWrapper";
 export default function Projects(): JSX.Element {
   return (
     <ExpandableWrapper>
-      <h2 className="mx-auto text-center text-3xl md:text-5xl mb-16 font-bold text-purple-heart-950 [@media(min-width:1620px)]:hidden">Projects</h2>
+      <h2 className="mx-auto mb-16 text-center text-3xl font-bold text-purple-heart-950 md:text-5xl [@media(min-width:1620px)]:hidden">Projects</h2>
       {projectItemsOpts.map((i, key) => (
         <ProjectItem {...i} key={key} />
       ))}
@@ -71,7 +71,7 @@ const projectItemsOpts: TProjectItem[] = [
     description: "My first portfolio hosted on Netlify. It showcases my skills, projects, services and provides a way to contact me.",
     tags: ["React", "Typescript", "Styled Components", "Email js"],
     date: "06/13/2022",
-    repoURL: "https://github.com/gpmotta21/Portfolio",
+    repoURL: "https://github.com/gpmotta21/Portfolio-Old",
     websiteURL: "https://gabrielp.netlify.app/",
     thumbSrc: "projects-portfolio-v1.webp",
   },

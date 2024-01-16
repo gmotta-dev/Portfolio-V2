@@ -10,7 +10,7 @@ export default {
   },
   stacks(app) {
     app.stack(function Site({ stack }) {
-      const site = new NextjsSite(stack, "site", { customDomain: "gmotta.com" });
+      const site = new NextjsSite(stack, "site", { customDomain: { domainName: "gmotta.com", domainAlias: "www.gmotta.com" } });
 
       stack.addOutputs({
         SiteUrl: site.url,

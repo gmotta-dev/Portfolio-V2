@@ -2,7 +2,7 @@ import { Metadata } from "next";
 
 export const buildMetadata = (props: UtilProps) => {
 
-  const chosenImg = props.ogImage || 'SEO-portfolio.webp'
+  const chosenImg = props.ogImage || 'images/SEO-portfolio.webp'
   const loader = process.env.NEXT_PUBLIC_CLOUDFRONT_URL
 
   const images = [{ url: `${loader}/${chosenImg}`, width: 1000, height: 800 }]

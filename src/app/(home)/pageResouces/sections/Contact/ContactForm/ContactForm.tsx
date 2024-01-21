@@ -34,7 +34,7 @@ export default function ContactForm() {
     <>
       <Toast {...toastStates} />
 
-      <form onSubmit={formStates.onSubmit(handleSubmit)} className="mt-10 flex w-full flex-col gap-9">
+      <form onSubmit={formStates.handleSubmit(handleSubmit)} className="mt-10 flex w-full flex-col gap-9">
         <div className="flex flex-wrap justify-center gap-4 lg:justify-start">
           <SubjectRadio subjectState={formStates.formValues.subject} register={formStates.register("subject")} Icon={WatsonHealthAiResults} id="other" text="Other" />
           <SubjectRadio subjectState={formStates.formValues.subject} register={formStates.register("subject")} Icon={PaintBrush} id="landing-page" text="Landing Page" />

@@ -15,7 +15,6 @@
      env:
      #Define your envs needed for static generation:
      AWS_ACCESS_KEY_ID: awd
-     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
      steps:
        - name: Git clone the repository
          uses: actions/checkout@v3

@@ -19,7 +19,7 @@
          uses: aws-actions/configure-aws-credentials@v2
          with:
            role-to-assume: arn:aws:iam::733307588149:role/GitHub
-           role-duration-seconds: 14390 #adjust as needed for your build time
+           role-duration-seconds: 30000 #adjust as needed for your build time
            aws-region: us-east-1
        - name: Deploy app
          run: |

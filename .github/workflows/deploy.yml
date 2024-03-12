@@ -12,13 +12,10 @@
  jobs:
    DeployApp:
      runs-on: ubuntu-latest
-         env:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      AWS_DEFAULT_REGION: ${{ vars.AWS_DEFAULT_REGION }}
-
-     #Define your envs needed for static generation:
-     # ENV_NAME: ${{ secrets.ENV_NAME }}
+     env:
+     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+     AWS_DEFAULT_REGION: ${{ vars.AWS_DEFAULT_REGION }}
      steps:
        - name: Git clone the repository
          uses: actions/checkout@v3

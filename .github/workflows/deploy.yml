@@ -14,7 +14,7 @@
      runs-on: ubuntu-latest
      env:
      #Define your envs needed for static generation:
-     AWS_ACCESS_KEY_ID: awd
+     sD: awd
      steps:
        - name: Git clone the repository
          uses: actions/checkout@v3

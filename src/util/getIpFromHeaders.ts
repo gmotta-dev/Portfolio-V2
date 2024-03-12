@@ -1,9 +1,16 @@
-export default function getIpFromHeaders(headers: Headers) {
-  let ip = headers.get("x-real-ip") || "";
+import { headers as nextHeaders } from "next/headers";
+
+export default function getIpFromHeaders(optHeaders?: Headers) {
+  const headers = optHeaders || nextHeaders();
+  let ip = "";
+  const FALLBACK_IP_ADDRESS = "0.0.0.0";
   const forwardedFor = headers.get("x-forwarded-for");
 
-  if (!ip && forwardedFor) ip = forwardedFor.split(",").at(0) ?? "127.0.0.1";
-  else ip = "127.0.0.1";
+  if (forwardedFor) {
+    ip = forwardedFor.split(",")[0] ?? FALLBACK_IP_ADDRESS;
+  }
+
+  ip = headers.get("x-real-ip") ?? FALLBACK_IP_ADDRESS;
 
   return ip;
 }

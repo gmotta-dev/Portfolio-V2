@@ -10,17 +10,17 @@ import getIpFromHeaders from "@/util/getIpFromHeaders";
 import returnZodErrors from "@/util/returnZodErrors";
 import { contactFormSchema, TContactFormSchema } from "./schema";
 
-const ratelimit = new Ratelimit({
-  redis: redisPool,
-  limiter: Ratelimit.fixedWindow(5, "60 s"),
-});
-
 export default async function contactFormAction(formData: TContactFormSchema) {
+  const ratelimit = new Ratelimit({
+    redis: redisPool,
+    limiter: Ratelimit.fixedWindow(5, "60 s"),
+  });
+
   try {
     const reqHeaders = headers();
     const ip = getIpFromHeaders(reqHeaders);
 
-    const result = await ratelimit.limit(ip,);
+    const result = await ratelimit.limit(ip);
     if (!result.success) return { toast: { title: "Rate Limited", stylization: { theme: "error" } } as TToast };
 
     const fieldValues = contactFormSchema.parse(formData);

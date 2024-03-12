@@ -12,9 +12,6 @@
  jobs:
    DeployApp:
      runs-on: ubuntu-latest
-     env:
-     #Define your envs needed for static generation:
-     # ENV_NAME: ${{ secrets.ENV_NAME }}
      steps:
        - name: Git clone the repository
          uses: actions/checkout@v3

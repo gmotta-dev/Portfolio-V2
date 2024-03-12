@@ -1,30 +1,25 @@
- name: SST workflow
- on: push
-
- # Concurrency group name ensures concurrent workflow runs wait for any in-progress job to finish
- concurrency:
-   group: merge-${{ github.ref }}
-
- permissions:
-   id-token: write # This is required for requesting the JWT
-   contents: read # This is required for actions/checkout
-
- jobs:
-   DeployApp:
-     runs-on: ubuntu-latest
-     env:
-     #Define your envs needed for static generation:
-     AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-     AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-     steps:
-       - name: Git clone the repository
-         uses: actions/checkout@v3
-       - name: Configure AWS credentials
-         uses: aws-actions/configure-aws-credentials@v2
-         with:
-           role-to-assume: arn:aws:iam::733307588149:role/GitHub
-           role-duration-seconds: 14390 #adjust as needed for your build time
-           aws-region: us-east-1
-       - name: Deploy app
-         run: |
-           npm i && npx sst deploy --stage prod
+name: SST workflow
+'on': push
+concurrency:
+  group: 'merge-${{ github.ref }}'
+permissions:
+  id-token: write
+  contents: read
+jobs:
+  DeployApp:
+    runs-on: ubuntu-latest
+    env: null
+    AWS_ACCESS_KEY_ID: '${{ secrets.AWS_ACCESS_KEY_ID }}'
+    AWS_SECRET_ACCESS_KEY: '${{ secrets.AWS_SECRET_ACCESS_KEY }}'
+    steps:
+      - name: Git clone the repository
+        uses: actions/checkout@v3
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: 'arn:aws:iam::733307588149:role/GitHub'
+          role-duration-seconds: 14390
+          aws-region: us-east-1
+      - name: Deploy app
+        run: |
+          npm i && npx sst deploy --stage prod

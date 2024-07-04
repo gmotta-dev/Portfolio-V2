@@ -3,6 +3,15 @@ import Image from "next/image";
 
 import ContentWrapper from "@/components/ContentWrapper";
 import TNextImage from "@/types/TNextImage";
+import React from "@/components/Icons/React";
+import Sql from "@/components/Icons/Sql";
+import Git from "@/components/Icons/Git";
+import Aws from "@/components/Icons/Aws";
+import Node from "@/components/Icons/Node";
+import Typescript from "@/components/Icons/Typescript";
+import Figma from "@/components/Icons/Figma";
+import Tailwind from "@/components/Icons/Tailwind";
+import Nextjs from "@/components/Icons/Nextjs";
 
 export default function Skills(): JSX.Element {
   return (
@@ -23,14 +32,14 @@ export default function Skills(): JSX.Element {
   );
 }
 
-type TSkill = { img: TNextImage; className?: string };
+type TSkill = { icon: React.ElementType; className?: string };
 
 const SkillComponent: FC<TSkill> = (props) => {
   return (
     <li
       className={`flex min-h-[96px] cursor-pointer items-center justify-center rounded-lg bg-sulu-300 px-2 duration-150 hover:bg-sulu-200 
       ${props.className || ""}`}>
-      <Image {...props.img} src={props.img.src} />
+      <props.icon />
     </li>
   );
 };
@@ -38,83 +47,38 @@ const SkillComponent: FC<TSkill> = (props) => {
 const skills: TSkill[] = [
   {
     className: "md:col-span-2 md:row-span-2",
-    img: {
-      src: "skills-react.svg",
-      width: 60,
-      height: 60,
-      alt: "React Logo",
-    },
+    icon: React
   },
   {
     className: "col-[2/4] md:col-[3/5]",
-    img: {
-      src: "skills-next.svg",
-      width: 60,
-      height: 60,
-      alt: "Next Logo",
-    },
+    icon: Nextjs
   },
   {
     className: "md:col-span-2",
-    img: {
-      src: "skills-tailwind.svg",
-      width: 60,
-      height: 60,
-      alt: "Tailwind Logo",
-    },
+    icon: Tailwind
   },
   {
     className: "md:row-start-2 md:col-start-6",
-    img: {
-      src: "skills-figma.svg",
-      width: 56,
-      height: 56,
-      alt: "React Logo",
-    },
+    icon: Figma
   },
   {
     className: "md:col-[7/9] md:row-span-3",
-    img: {
-      src: "skills-typescript.svg",
-      width: 51,
-      height: 52,
-      alt: "Typescript Logo",
-    },
+    icon: Typescript
   },
   {
     className: "col-span-2 md:col-span-3",
-    img: {
-      src: "skills-node.svg",
-      width: 115,
-      height: 60,
-      alt: "Node Logo",
-    },
+    icon: Node
   },
   {
     className: "col-span-2 md:col-span-3",
-    img: {
-      src: "skills-aws.svg",
-      width: 83,
-      height: 71,
-      alt: "AWS Logo",
-    },
+    icon: Aws
   },
   {
     className: "md:col-start-1 md:row-start-3 md:col-span-2",
-    img: {
-      src: "skills-git.svg",
-      width: 50,
-      height: 50,
-      alt: "Git Logo",
-    },
+    icon: Git
   },
   {
     className: "md:col-start-6 md:row-start-3",
-    img: {
-      src: "skills-sql.svg",
-      width: 50,
-      height: 50,
-      alt: "SQL Logo",
-    },
+    icon: Sql
   },
 ];

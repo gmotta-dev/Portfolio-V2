@@ -13,7 +13,6 @@ export default function Home() {
       <Section.AboutMe />
       <Section.Skills />
       <Section.Projects />
-      <Section.Contact />
     </main>
   );
 }

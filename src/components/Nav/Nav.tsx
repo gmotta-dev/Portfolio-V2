@@ -25,7 +25,7 @@ export default function Nav() {
             "w-full flex-col items-center justify-evenly gap-4 rounded-3xl bg-zinc-50 py-6 text-sm font-medium  shadow-md shadow-black/20 lg:relative lg:top-0 lg:!flex lg:flex-row lg:justify-end lg:gap-10 lg:bg-transparent lg:py-0 lg:shadow-none",
             expand ? "flex" : "hidden",
           )}>
-          {["About me", "Skills", "Projects", "Contact"].map((i, key) => (
+          {["About me", "Skills", "Projects"].map((i, key) => (
             <a key={key} href={"#" + i.toLowerCase().replace(" ", "-")} className="flex h-10 items-center justify-center px-6 md:px-0" onClick={() => setExpand(false)}>
               {i}
             </a>

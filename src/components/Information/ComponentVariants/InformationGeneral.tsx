@@ -12,7 +12,7 @@ export default function InformationGeneral(props: TInformationSocialMedia) {
         "all-items-labels": props.classNames?.["all-items-labels"],
       }}
       items={[
-        { icon: LogoGithub, name: "Github", href: "https://github.com/gpmotta21", element: "a", label: props.label ? "Github" : undefined },
+        { icon: LogoGithub, name: "Github", href: "https://github.com/gmotta-dev", element: "a", label: props.label ? "Github" : undefined },
         { icon: LogoLinkedin, name: "Linkedin", href: "https://www.linkedin.com/in/gpmotta21/", element: "a", label: props.label ? "Linkedin" : undefined },
         {
           icon: UserProfile,

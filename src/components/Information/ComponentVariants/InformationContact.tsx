@@ -17,8 +17,8 @@ export default function InformationContact(props: TInformationGeneral) {
         {
           icon: Email,
           name: "Email",
-          label: "gpmotta21@gmail.com",
-          href: "mailto:gpmotta21@gmail.com",
+          label: "gmotta.developer@gmail.com",
+          href: "mailto:gmotta.developer@gmail.com",
           element: "a",
           classNames: { icon: props.classNames?.["email-icon"], label: props.classNames?.["email-label"], container: props.classNames?.["email-container"] },
         },

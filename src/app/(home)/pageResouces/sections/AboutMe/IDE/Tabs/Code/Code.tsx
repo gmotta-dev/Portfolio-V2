@@ -49,7 +49,7 @@ export default function Code({ typewriterTexts: { classNames, textsValues } }: T
               element="a"
               attributes={[
                 { key: "className", value: classNames.iconsItems.text },
-                { key: "href", value: "https://github.com/gpmotta21" },
+                { key: "href", value: "https://github.com/gmotta-dev" },
               ]}>
               <Tag element="LogoGithub" />
             </Tag>
